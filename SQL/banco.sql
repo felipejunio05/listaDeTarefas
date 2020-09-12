@@ -1,0 +1,25 @@
+CREATE DATABASE IF NOT EXISTS app_listaTaferas;
+
+use app_listaTaferas;
+
+CREATE TABLE IF NOT EXISTS tb_status (
+	id INT UNSIGNED PRIMARY  KEY AUTO_INCREMENT,
+	status VARCHAR(25) not null
+);
+
+INSERT INTO tb_status(status) VALUES ('pendente'), ('realizado');
+
+CREATE TABLE IF NOT EXISTS tb_tarefas (
+	id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+	id_status INT UNSIGNED  NOT NULL DEFAULT 1,
+	FOREIGN KEY(id_status) references tb_status(id),
+	tarefa TEXT NOT NULL,
+	data_cadastrado DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS tb_usuarios (
+	id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+	nome VARCHAR(50) NOT NULL,
+	email VARCHAR(100) NOT NULL,
+	senha VARCHAR(32) NOT NULL
+);
