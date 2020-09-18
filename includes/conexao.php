@@ -10,7 +10,7 @@
                 return new PDO("mysql:host=$this->host;dbname=$this->dbname", "$this->user", "$this->pass");
 
             } catch(PDOException $error) {
-                echo '<p>'.$error->getMessege().'</p>';
+                echo '<p>'. $error->getMessage(). '</p>';
             }
         }
     }
