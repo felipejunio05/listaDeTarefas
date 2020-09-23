@@ -64,5 +64,23 @@
 
             return $stmt->execute();
         }
+
+        public function marcarOK() {
+            $query = '
+                        UPDATE 
+                            tb_tarefas
+                        SET
+                            id_status = :id_status
+                        WHERE
+                            id = :id
+            ';
+
+            $stmt = $this->conexao->prepare($query);
+            $stmt->bindValue(':id', $this->tarefa->__get('id'));
+            $stmt->bindValue(':id_status', $this->tarefa->__get('id_status'));
+
+            return $stmt->execute();
+        
+        }
     }
 ?>

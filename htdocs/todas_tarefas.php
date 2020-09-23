@@ -52,6 +52,10 @@
 			function remover(nId) {
 				location.href = `todas_tarefas.php?acao=remover&id=${nId}`
 			}
+			
+			function marcarOK(nId) {
+				location.href = `todas_tarefas.php?acao=marcarOK&id=${nId}`
+			}
 
 			function fixConteudo(cTexto) {
 				cTexto = cTexto.trim()
@@ -99,8 +103,11 @@
 										</div>
 										<div class="col-sm-3 mt-2 d-flex justify-content-between">
 											<i onclick="remover(<?= $tarefa->id ?>)" class="fas fa-trash-alt fa-lg text-danger"></i>
-											<i onclick="editar(<?= $tarefa->id ?>)" class="fas fa-edit fa-lg text-info"></i>
-											<i class="fas fa-check-square fa-lg text-success"></i>
+
+											<? if ( $tarefa->status === 'pendente' ) { ?>
+												<i onclick="editar(<?= $tarefa->id ?>)" class="fas fa-edit fa-lg text-info"></i>
+												<i onclick="marcarOK(<?= $tarefa->id ?>)" class="fas fa-check-square fa-lg text-success"></i>
+											<? } ?>
 										</div>
 									</div>
 								<? } ?>
