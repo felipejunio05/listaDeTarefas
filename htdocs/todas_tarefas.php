@@ -22,7 +22,7 @@
 				let oButton = document.createElement("button")
 
 				let oTarefa = document.getElementById(`tarefa_${nId}`)
-				let cTarefa = removerStatus(oTarefa.innerHTML)
+				let cTarefa = fixConteudo(oTarefa.innerHTML)
 
 				oForm.action = "tarefa_controller.php?acao=atualizar"
 				oForm.method = "post"
@@ -49,7 +49,11 @@
 				oTarefa.insertBefore(oForm, oTarefa[0])
 			}
 
-			function removerStatus(cTexto) {
+			function remover(nId) {
+				location.href = `todas_tarefas.php?acao=remover&id=${nId}`
+			}
+
+			function fixConteudo(cTexto) {
 				cTexto = cTexto.trim()
 
 				for (let i = cTexto.length; i > 0; i--) {
@@ -94,7 +98,7 @@
 											<?= $tarefa->tarefa ?> (<?= $tarefa->status ?>)
 										</div>
 										<div class="col-sm-3 mt-2 d-flex justify-content-between">
-											<i class="fas fa-trash-alt fa-lg text-danger"></i>
+											<i onclick="remover(<?= $tarefa->id ?>)" class="fas fa-trash-alt fa-lg text-danger"></i>
 											<i onclick="editar(<?= $tarefa->id ?>)" class="fas fa-edit fa-lg text-info"></i>
 											<i class="fas fa-check-square fa-lg text-success"></i>
 										</div>
