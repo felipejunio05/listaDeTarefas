@@ -1,5 +1,6 @@
 <?php
 	$acao = 'recuperar';
+	$filtro = false;
 
 	require_once 'tarefa_controller.php';
 ?>
@@ -14,60 +15,7 @@
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
 
-		<script>
-			function editar(nId) {
-				let oForm = document.createElement("form")
-				let oInput = document.createElement("input")
-				let oInputID = document.createElement("input")
-				let oButton = document.createElement("button")
-
-				let oTarefa = document.getElementById(`tarefa_${nId}`)
-				let cTarefa = fixConteudo(oTarefa.innerHTML)
-
-				oForm.action = "tarefa_controller.php?acao=atualizar"
-				oForm.method = "post"
-				oForm.className = "mt-4 row"
-
-				oInput.type = "text"
-				oInput.name = "tarefa"
-				oInput.className = "col-9 form-control"
-				oInput.value = cTarefa
-				
-				oInputID.type  = "hidden"
-				oInputID.name = "id"
-				oInputID.value = nId
-
-				oButton.type = "submit"
-				oButton.className = "col-3 btn btn-info"
-				oButton.innerHTML = "Atualizar"
-
-				oForm.appendChild(oInput)
-				oForm.appendChild(oInputID)
-				oForm.appendChild(oButton)
-
-				oTarefa.innerHTML = ""
-				oTarefa.insertBefore(oForm, oTarefa[0])
-			}
-
-			function remover(nId) {
-				location.href = `todas_tarefas.php?acao=remover&id=${nId}`
-			}
-			
-			function marcarOK(nId) {
-				location.href = `todas_tarefas.php?acao=marcarOK&id=${nId}`
-			}
-
-			function fixConteudo(cTexto) {
-				cTexto = cTexto.trim()
-
-				for (let i = cTexto.length; i > 0; i--) {
-					if ( cTexto.substr(i, 1) == '(') {
-
-						return cTexto.substr(0, i).trim()
-					}
-				}
-			}
-		</script>
+		<script src="js/listaTarefas.js"></script>
 	</head>
 
 	<body>

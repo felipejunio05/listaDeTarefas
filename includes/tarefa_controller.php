@@ -14,14 +14,14 @@
         $tarefaService = new TarefaService($conexao, $tarefa);
         $tarefaService->inserir();
 
-        header('Location: nova_tarefa.php?inclusao=1');
+        header('location: nova_tarefa.php?inclusao=1');
 
     } else if ( $acao == 'recuperar') {
         $tarefa = new Tarefa();
         $conexao = new Conexao();
 
         $tarefaService = new TarefaService($conexao, $tarefa);
-        $tarefas = $tarefaService->recuperar();
+        $tarefas = $tarefaService->recuperar($filtro);
 
     } else if ( $acao == 'atualizar' ) {
         $tarefa = new Tarefa();
@@ -33,7 +33,12 @@
         $tarefaService = new TarefaService($conexao, $tarefa);
 
         if ( $tarefaService->atualizar() ) {
-            header('location: todas_tarefas.php');
+            if ( isset($_GET['pag']) && $_GET['pag'] === 'index') {
+                header('location: index.php');
+
+            } else {
+                header('location: todas_tarefas.php');
+            }
         }
 
     } else if ( $acao == 'remover' ) {
@@ -45,8 +50,14 @@
         $tarefaService = new TarefaService($conexao, $tarefa);
 
         if ( $tarefaService->remover() ) {
-            header('location: todas_tarefas.php');
+            if ( isset($_GET['pag']) && $_GET['pag'] === 'index') {
+                header('location: index.php');
+
+            } else {
+                header('location: todas_tarefas.php');
+            }
         }
+
     } else if ( $acao == 'marcarOK' ) {
         $tarefa = new Tarefa();
         $conexao = new Conexao();
@@ -57,7 +68,12 @@
         $tarefaService = new TarefaService($conexao, $tarefa);
 
         if ( $tarefaService->marcarOK() ) {
-            header('location: todas_tarefas.php');
+            if ( isset($_GET['pag']) && $_GET['pag'] === 'index') {
+                header('location: index.php');
+
+            } else {
+                header('location: todas_tarefas.php');
+            }
         }
     }
 ?>

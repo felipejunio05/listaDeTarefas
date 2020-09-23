@@ -16,7 +16,7 @@
             $stmt->execute();
         }
 
-        public function recuperar() {
+        public function recuperar($filtro) {
             $query = '
                         SELECT
                             t.id, t.tarefa, s.status
@@ -24,7 +24,11 @@
                             tb_tarefas as t 
                         LEFT JOIN 
                             tb_status as s ON s.id = t.id_status
-                        ';
+            ';
+
+            if ( $filtro ) {
+                $query .= 'WHERE t.id_status = 1';
+            }
 
             $stmt = $this->conexao->prepare($query);
             $stmt->execute();
